@@ -9,34 +9,10 @@
 <body>
     <div class="container">
         <h1>Pronunciation Practice Game</h1>
-        
-        <!-- Category and difficulty selection -->
-        <div class="settings">
-            <label for="category">Choose Category:</label>
-            <select id="category">
-                <option value="common">Common Words</option>
-                <option value="difficult">Difficult Words</option>
-                <option value="advanced">Advanced Words</option>
-            </select>
-
-            <label for="difficulty">Choose Difficulty:</label>
-            <select id="difficulty">
-                <option value="easy">Easy</option>
-                <option value="medium">Medium</option>
-                <option value="hard">Hard</option>
-            </select>
-
-            <button id="start-button">Start Practice</button>
-        </div>
-
-        <!-- Game display -->
         <p id="word-to-practice">Word: <span id="word"></span></p>
-        <button id="play-audio">Listen to the Word</button>
+        <button id="start-button">Start Pronunciation</button>
         <p id="feedback"></p>
-        <p id="score">Score: <span id="score-value">0</span></p>
-        <audio id="word-audio"></audio>
     </div> By Ali Mosad
-
     <script src="script.js"></script>
 </body>
 </html>
