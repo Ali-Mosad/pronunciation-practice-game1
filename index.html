@@ -17,16 +17,19 @@
             </div>
             <div id="buttons">
                 <button id="startBtn">Start Game</button>
-                <button id="playWordBtn">Play Word</button>
-                <button id="recordBtn">Record Pronunciation</button>
+                <button id="playWordBtn" disabled>Play Word</button>
+                <button id="recordBtn" disabled>Record Pronunciation</button>
             </div>
             <div id="feedback">
                 <h3 id="result">Your pronunciation: </h3>
-            </div>By Ali Mosad
+            </div>
+            <div id="micError" style="color: red; display: none;">
+                <p>There was an issue with microphone access. Please ensure your microphone is working and granted permissions.</p>
+            </div>
         </section>
     </main>
     <footer>
-        <p>Created by Your Name</p>
+        <p>Created by Ali Mosad</p>
     </footer>
     <script src="scripts.js"></script>
 </body>

@@ -1,4 +1,4 @@
-// List of words and sounds to practice
+// List of words and sounds to practice (ensure the audio files exist in the 'audio/' folder)
 const words = [
     { word: 'through', audio: 'audio/through.mp3' },
     { word: 'though', audio: 'audio/though.mp3' },
@@ -15,6 +15,7 @@ const startBtn = document.getElementById('startBtn');
 const playWordBtn = document.getElementById('playWordBtn');
 const recordBtn = document.getElementById('recordBtn');
 const feedbackElement = document.getElementById('result');
+const micErrorElement = document.getElementById('micError');
 
 // Initialize game
 function startGame() {
@@ -23,6 +24,7 @@ function startGame() {
     updateWordDisplay();
     playWordBtn.disabled = false;
     recordBtn.disabled = false;
+    micErrorElement.style.display = 'none';
 }
 
 // Update the word on the screen
@@ -38,9 +40,19 @@ function playWordAudio() {
 
 // Record pronunciation (using Web Speech API)
 async function recordPronunciation() {
+    // Check if SpeechRecognition is supported
+    if (!('SpeechRecognition' in window || 'webkitSpeechRecognition' in window)) {
+        micErrorElement.style.display = 'block';
+        return;
+    }
+
     const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
     recognition.lang = 'en-US';
     recognition.start();
+
+    recognition.onstart = () => {
+        console.log('Speech recognition started. Speak now...');
+    };
 
     recognition.onresult = (event) => {
         const transcript = event.results[0][0].transcript.toLowerCase();
@@ -49,12 +61,18 @@ async function recordPronunciation() {
         if (transcript === correctWord) {
             feedbackElement.innerText = "Your pronunciation is correct! 🎉";
         } else {
-            feedbackElement.innerText = "Try again! 😬";
+            feedbackElement.innerText = `Your pronunciation: "${transcript}" (Try again!)`;
         }
     };
 
-    recognition.onerror = () => {
-        feedbackElement.innerText = "Sorry, I didn't catch that. Please try again.";
+    recognition.onerror = (event) => {
+        micErrorElement.style.display = 'block';
+        console.error('Speech recognition error:', event.error);
+        feedbackElement.innerText = "Sorry, there was an error with speech recognition.";
+    };
+
+    recognition.onend = () => {
+        console.log('Speech recognition ended.');
     };
 }
 
@@ -63,6 +81,7 @@ startBtn.addEventListener('click', startGame);
 playWordBtn.addEventListener('click', playWordAudio);
 recordBtn.addEventListener('click', recordPronunciation);
 
+// Disable buttons initially
 startBtn.disabled = false;
 playWordBtn.disabled = true;
 recordBtn.disabled = true;
