@@ -14,10 +14,11 @@ body {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 350px;
 }
 
 button {
-    margin-top: 20px;
+    margin-top: 10px;
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
@@ -25,13 +26,30 @@ button {
     border-radius: 5px;
     background-color: #007BFF;
     color: white;
+    transition: background-color 0.3s;
 }
 
 button:hover {
     background-color: #0056b3;
 }
 
+.settings {
+    margin-bottom: 20px;
+}
+
+#countdown {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+}
+
 #feedback {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #333;
+}
+
+#score {
     margin-top: 20px;
     font-size: 18px;
     color: #333;
