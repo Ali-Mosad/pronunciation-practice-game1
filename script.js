@@ -51,7 +51,7 @@ function startGame() {
     displayWord();
 
     startButton.enabled = true;
-    playAudioButton.enabled = false;
+    playAudioButton.enabled = true;
 }
 
 // Function to start speech recognition
