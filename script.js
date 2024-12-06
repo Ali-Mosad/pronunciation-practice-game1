@@ -13,7 +13,7 @@ const words = {
     advanced: [
         { word: 'entrepreneur', audio: 'https://www.merriam-webster.com/audio/prons/en/us/mp3/e/entrepr01.mp3', tip: 'Practice saying it in syllables: "en-tre-pre-neur".' },
         { word: 'phenomenon', audio: 'https://www.merriam-webster.com/audio/prons/en/us/mp3/p/phenome01.mp3', tip: 'Stress the middle syllable: "phe-NOM-e-non".' },
-        { word: 'anemone', audio: 'https://www.merriam-webster.com/audio/prons/en/us/mp3/a/anemone01.mp3', tip: 'The "e" is like "uh" and the "o" is silent: "uh-NEM-o-nee".' }
+        { word: 'anemone', audio: 'https://www.merriam-webster.com/dictionary/anemone?pronunciation&lang=en_us&dir=a&file=anemon01', tip: 'The "e" is like "uh" and the "o" is silent: "uh-NEM-o-nee".' }
     ]
 };
 
