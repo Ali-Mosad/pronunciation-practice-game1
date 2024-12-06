@@ -3,16 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pronunciation Practice Game</title>
+    <title>Pronunciation Practice</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
+    <header>
         <h1>Pronunciation Practice Game</h1>
-        <p id="word-to-practice">Word: <span id="word"></span></p>
-        <button id="start-button">Start Pronunciation</button>
-        <p id="feedback"></p>
-    </div> By Ali Mosad
-    <script src="script.js"></script>
+    </header>
+    <main>
+        <section id="game">
+            <h2 id="word"></h2>
+            <p id="feedback"></p>
+            <div>
+                <button id="start-button">Start Pronunciation Practice</button>
+                <p id="counter">Correct Pronunciations: 0</p>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>Created by Ali Mosad</p>
+    </footer>
+    <script src="scripts.js"></script>
 </body>
 </html>
