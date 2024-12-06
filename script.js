@@ -1,48 +1,70 @@
-// List of words and sounds to practice (ensure the audio files exist in the 'audio/' folder)
-const words = [
-    { word: 'through', audio: 'audio/through.mp3' },
-    { word: 'though', audio: 'audio/though.mp3' },
-    { word: 'thought', audio: 'audio/thought.mp3' },
-    { word: 'knight', audio: 'audio/knight.mp3' },
-    { word: 'recipe', audio: 'audio/recipe.mp3' }
-];
+// List of example words and their definitions
+const dictionary = {
+    "through": {
+        definition: "Moving in one side and out the other side of (an opening, channel, or location).",
+        audio: "audio/through.mp3"
+    },
+    "though": {
+        definition: "In spite of the fact that; although.",
+        audio: "audio/though.mp3"
+    },
+    "thought": {
+        definition: "An idea or opinion produced by thinking or occurring suddenly in the mind.",
+        audio: "audio/thought.mp3"
+    },
+    "knight": {
+        definition: "A man who served his sovereign or lord as a mounted soldier in armor.",
+        audio: "audio/knight.mp3"
+    },
+    "recipe": {
+        definition: "A set of instructions for preparing a particular dish, including a list of the ingredients required.",
+        audio: "audio/recipe.mp3"
+    }
+};
 
-let currentWordIndex = 0;
+let currentWord = "";
 
 // DOM Elements
 const wordElement = document.getElementById('word');
-const startBtn = document.getElementById('startBtn');
+const definitionElement = document.getElementById('definition');
 const playWordBtn = document.getElementById('playWordBtn');
 const recordBtn = document.getElementById('recordBtn');
 const feedbackElement = document.getElementById('result');
-const micErrorElement = document.getElementById('micError');
+const searchBtn = document.getElementById('searchBtn');
+const wordSearchInput = document.getElementById('wordSearch');
 
-// Initialize game
-function startGame() {
-    currentWordIndex = 0;
+// Search for a word in the dictionary
+function searchWord() {
+    const searchTerm = wordSearchInput.value.toLowerCase().trim();
+    
+    if (dictionary[searchTerm]) {
+        currentWord = searchTerm;
+        updateWordDisplay(dictionary[searchTerm].definition);
+    } else {
+        feedbackElement.innerText = "Sorry, the word is not in the dictionary.";
+        resetButtons();
+    }
+}
+
+// Update the word display and enable the buttons
+function updateWordDisplay(definition) {
+    wordElement.innerText = currentWord;
+    definitionElement.innerText = definition;
     feedbackElement.innerText = "Your pronunciation: ";
-    updateWordDisplay();
     playWordBtn.disabled = false;
     recordBtn.disabled = false;
-    micErrorElement.style.display = 'none';
 }
 
-// Update the word on the screen
-function updateWordDisplay() {
-    wordElement.innerText = words[currentWordIndex].word;
-}
-
-// Play the word audio
+// Play the pronunciation audio
 function playWordAudio() {
-    const audio = new Audio(words[currentWordIndex].audio);
+    const audio = new Audio(dictionary[currentWord].audio);
     audio.play();
 }
 
-// Record pronunciation (using Web Speech API)
+// Record and check pronunciation using the Web Speech API
 async function recordPronunciation() {
-    // Check if SpeechRecognition is supported
     if (!('SpeechRecognition' in window || 'webkitSpeechRecognition' in window)) {
-        micErrorElement.style.display = 'block';
+        alert("Sorry, your browser does not support speech recognition.");
         return;
     }
 
@@ -56,18 +78,16 @@ async function recordPronunciation() {
 
     recognition.onresult = (event) => {
         const transcript = event.results[0][0].transcript.toLowerCase();
-        const correctWord = words[currentWordIndex].word.toLowerCase();
+        const correctWord = currentWord.toLowerCase();
 
         if (transcript === correctWord) {
             feedbackElement.innerText = "Your pronunciation is correct! 🎉";
         } else {
-            feedbackElement.innerText = `Your pronunciation: "${transcript}" (Try again!)`;
+            feedbackElement.innerText = `You said: "${transcript}" (Try again!)`;
         }
     };
 
     recognition.onerror = (event) => {
-        micErrorElement.style.display = 'block';
-        console.error('Speech recognition error:', event.error);
         feedbackElement.innerText = "Sorry, there was an error with speech recognition.";
     };
 
@@ -76,12 +96,17 @@ async function recordPronunciation() {
     };
 }
 
+// Reset buttons if word is not found
+function resetButtons() {
+    playWordBtn.disabled = true;
+    recordBtn.disabled = true;
+}
+
 // Event Listeners
-startBtn.addEventListener('click', startGame);
+searchBtn.addEventListener('click', searchWord);
 playWordBtn.addEventListener('click', playWordAudio);
 recordBtn.addEventListener('click', recordPronunciation);
 
 // Disable buttons initially
-startBtn.disabled = false;
 playWordBtn.disabled = true;
 recordBtn.disabled = true;
