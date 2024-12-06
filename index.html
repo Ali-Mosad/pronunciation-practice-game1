@@ -3,35 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pronunciation Practice with Dictionary</title>
+    <title>Pronunciation Practice Game</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>Pronunciation Practice Game with Dictionary</h1>
-    </header>
-    <main>
-        <section id="game">
-            <div id="search-container">
-                <input type="text" id="wordSearch" placeholder="Search for a word..." />
-                <button id="searchBtn">Search</button>
-            </div>
-            <div id="word-container">
-                <h2 id="word">Search a word to start practicing</h2>
-                <p id="definition"></p>
-            </div>
-            <div id="buttons">
-                <button id="playWordBtn" disabled>Play Word Pronunciation</button>
-                <button id="recordBtn" disabled>Record Pronunciation</button>
-            </div>
-            <div id="feedback">
-                <h3 id="result">Your pronunciation: </h3>
-            </div>
-        </section>
-    </main>
-    <footer>
-        <p>Created by Ali Mosad</p>
-    </footer>
-    <script src="scripts.js"></script>
+    <div class="container">
+        <h1>Pronunciation Practice Game</h1>
+        <p id="word-to-practice">Word: <span id="word"></span></p>
+        <button id="start-button">Start Pronunciation</button>
+        <p id="feedback"></p>
+    </div>Ali Mosad
+    <script src="script.js"></script>
 </body>
 </html>
